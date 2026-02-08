@@ -8,17 +8,22 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Hide sidebar safely
+# ---------------- GLOBAL STYLES ----------------
 st.markdown(
     """
     <style>
+        /* Baby pink background */
+        .stApp {
+            background-color: #ffe6f0;
+        }
+
+        /* Hide sidebar */
         [data-testid="stSidebar"],
         section[data-testid="stSidebarNav"] {
             display: none;
         }
-        .stApp {
-            pointer-events: auto;
-        }
+
+        /* Image styling */
         img {
             border-radius: 18px;
         }
@@ -27,7 +32,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Celebration
+# ---------------- CELEBRATION ----------------
 st.balloons()
 
 st.markdown(
@@ -44,7 +49,7 @@ st.markdown(
 st.write("")
 st.write("")
 
-# ---------- Slideshow ----------
+# ---------------- SLIDESHOW ----------------
 photos = [
     "assets/photos/photo1.jpg",
     "assets/photos/photo2.jpg",
@@ -57,19 +62,20 @@ if "slide_index" not in st.session_state:
 
 image_placeholder = st.empty()
 
-# Auto slideshow loop
-for _ in range(len(photos)):
-    image_placeholder.image(
-        photos[st.session_state.slide_index],
-        use_container_width=True
-    )
-    time.sleep(2.5)  # seconds per photo
-    st.session_state.slide_index = (
-        st.session_state.slide_index + 1
-    ) % len(photos)
-
-# Final image stays
+# Show current image
 image_placeholder.image(
     photos[st.session_state.slide_index],
     use_container_width=True
 )
+
+# Wait before next slide
+time.sleep(2.5)
+
+# Move to next image (loop infinitely)
+st.session_state.slide_index = (
+    st.session_state.slide_index + 1
+) % len(photos)
+
+# Rerun app to simulate infinite slideshow
+st.rerun()
+
