@@ -12,18 +12,15 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        /* Baby pink background */
         .stApp {
             background-color: #ffe6f0;
         }
 
-        /* Hide sidebar */
         [data-testid="stSidebar"],
         section[data-testid="stSidebarNav"] {
             display: none;
         }
 
-        /* Image styling */
         img {
             border-radius: 18px;
         }
@@ -32,9 +29,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---------------- CELEBRATION ----------------
-st.balloons()
-
+# ---------------- TEXT ----------------
 st.markdown(
     """
     <div style="text-align:center; color:#ff4b7d;">
@@ -57,25 +52,16 @@ photos = [
     "assets/photos/photo4.jpeg",
 ]
 
-if "slide_index" not in st.session_state:
-    st.session_state.slide_index = 0
-
 image_placeholder = st.empty()
 
-# Show current image
-image_placeholder.image(
-    photos[st.session_state.slide_index],
-    use_container_width=True
-)
+# Number of slideshow rounds (change to 2 or 3 if you want)
+ROUNDS = 1
 
-# Wait before next slide
-time.sleep(2.5)
+for _ in range(ROUNDS):
+    for photo in photos:
+        st.balloons()  # 🎈 Balloons for EVERY photo
+        image_placeholder.image(photo, use_container_width=True)
+        time.sleep(2.5)
 
-# Move to next image (loop infinitely)
-st.session_state.slide_index = (
-    st.session_state.slide_index + 1
-) % len(photos)
-
-# Rerun app to simulate infinite slideshow
-st.rerun()
-
+# Final photo stays
+image_placeholder.image(photos[-1], use_container_width=True)
