@@ -47,8 +47,8 @@ st.write("")
 # ---------------- SLIDESHOW ----------------
 photos = [
     "assets/photos/photo1.jpg",
-    "assets/photos/photo2.jpg",
-    "assets/photos/photo3.jpg",
+    "assets/photos/photo2.JPG",
+    "assets/photos/photo3.JPG",
     "assets/photos/photo4.jpeg",
 ]
 
